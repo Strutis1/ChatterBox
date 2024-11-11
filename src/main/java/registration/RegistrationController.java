@@ -30,6 +30,7 @@ public class RegistrationController {
         try {
             DataHandler handler = DataHandler.getInstance();
             handler.setUsername(clientUsername.getText());
+            handler.addConnectedUser(clientUsername.getText());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,8 +52,8 @@ public class RegistrationController {
 
     private void openLobby() {
         try {
-            FXMLLoader clientLoader = new FXMLLoader(getClass().getResource("/lobby/lobbyC.fxml"));
-            Parent clientRoot = clientLoader.load();
+            FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby/lobby.fxml"));
+            Parent clientRoot = lobbyLoader.load();
 
             Stage clientStage = new Stage();
             Scene clientScene = new Scene(clientRoot, 389, 578);

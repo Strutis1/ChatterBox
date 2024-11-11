@@ -8,4 +8,6 @@ module com.crew.mif.chatterbox {
     exports com.crew.mif.chatterbox;
     exports registration;
     opens registration to javafx.fxml;
+    exports lobby;
+    opens lobby to javafx.fxml;
 }

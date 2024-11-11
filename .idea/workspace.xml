@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/chat.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/lobby.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
+    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
+      <change afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +66,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Client.executor": "Run",
+    "Application.ClientApplication.executor": "Run",
+    "Application.Server.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
@@ -71,7 +80,26 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vejas\IdeaProjects\ChatterBox - Chat app\src\main\resources\lobby" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="com.crew.mif.chatterbox.ClientApplication" />
+      <module name="ChatterBox" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.crew.mif.chatterbox.ServerApplication" />
+      <module name="ChatterBox" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ChatterBox - Chat app" />
       <option name="ENV_FILES" value="" />
@@ -142,6 +170,10 @@
       <option name="docutils_open_in_browser" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -152,11 +184,24 @@
       <option name="presentableId" value="Default" />
       <updated>1731254580169</updated>
       <workItem from="1731254581426" duration="17000" />
-      <workItem from="1731308749804" duration="1446000" />
+      <workItem from="1731308749804" duration="8632000" />
     </task>
+    <task id="LOCAL-00001" summary="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
+      <option name="closed" value="true" />
+      <created>1731326803577</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731326803578</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line" />
+    <option name="LAST_COMMIT_MESSAGE" value="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line" />
   </component>
 </project>

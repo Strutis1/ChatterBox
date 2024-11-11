@@ -11,22 +11,17 @@ public class LobbyList {
     private ObservableList<String> clientList = FXCollections.observableArrayList();
     private ObservableList<String> roomList = FXCollections.observableArrayList();
 
-    public LobbyList(ListView<String> lobbyList, ObservableList<String> clientList, ObservableList<String> roomList){
-        this.currentShowingList = lobbyList;
-        this.clientList = clientList;
-        this.roomList = roomList;
-        currentShowingList.setItems(clientList);
-    }
 
     public LobbyList(ListView<String> lobbyList){
         this.currentShowingList = lobbyList;
+        showConnectedList();
     }
 
-    public void showClients(){
+    public void showConnectedList(){
         currentShowingList.setItems(clientList);
     }
 
-    public void showRooms(){
+    public void showRoomList(){
         currentShowingList.setItems(roomList);
     }
 
@@ -53,11 +48,9 @@ public class LobbyList {
 
     public void addClient(String client) {
         clientList.add(client);
-        currentShowingList.refresh();
     }
 
     public void addRoom(String roomName) {
         roomList.add(roomName);
-        currentShowingList.refresh();
     }
 }

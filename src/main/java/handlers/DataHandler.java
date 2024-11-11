@@ -1,6 +1,9 @@
 package handlers;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +12,7 @@ public final class DataHandler {
 
     private String username;
     private String selectedChat;
-    private List<String> connectedUsers = new ArrayList<>();
+    private ObservableList<String> connectedUsers = FXCollections.observableArrayList();
 
     private final static DataHandler INSTANCE = new DataHandler();
 
@@ -27,12 +30,23 @@ public final class DataHandler {
         return username;
     }
 
-    public List<String> getConnectedUsers() {
+    public ObservableList<String> getConnectedUsers() {
         return connectedUsers;
     }
 
-    public void updateConnectedUsers(List<String> users) {
+    public void updateConnectedUsers(ObservableList<String> users) {
         connectedUsers.clear();
         connectedUsers.addAll(users);
     }
+
+    public void addConnectedUser(String username) {
+        if (!connectedUsers.contains(username)) {
+            connectedUsers.add(username);
+        }
+    }
+
+    public void removeConnectedUser(String username) {
+        connectedUsers.remove(username);
+    }
+
 }
