@@ -4,15 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="" />
+    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/chat.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/lobby.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Strutis1"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Strutis1/ChatterBox.git",
+    "accountId": "d477f5ed-3f9f-4929-bdfa-e49e54f22d6d"
+  }
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -20,9 +49,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2ofJDEj4nkMWLCaGYTsybUx7Rlt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -34,6 +63,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -119,6 +152,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731254580169</updated>
       <workItem from="1731254581426" duration="17000" />
+      <workItem from="1731308749804" duration="1446000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crew.mif.chatterbox.ServerController">
+    <children>
+        <BorderPane prefHeight="82.0" prefWidth="390.0" style="-fx-background-color: darkblue;" AnchorPane.bottomAnchor="496.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <Label prefHeight="48.0" prefWidth="185.0" style="-fx-text-fill: cornflowerblue;" text="CHATTER BOX" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Haettenschweiler" size="45.0" />
+                    </font>
+                </Label>
+            </center>
+        </BorderPane>
+        <HBox layoutX="1.0" layoutY="535.0" prefHeight="44.0" prefWidth="389.0">
+            <children>
+                <TextField fx:id="message" prefHeight="42.0" prefWidth="328.0" style="-fx-background-color: lightgrey;" />
+                <Button fx:id="broadcastButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="122.0" style="-fx-background-color: cornflowerblue; -fx-text-fill: darkblue; -fx-font-family: franklin Gothic heavy; -fx-font-weight: bold;" text="Broadcast">
+                    <font>
+                        <Font name="Franklin Gothic Heavy" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+        <ScrollPane fx:id="scrollPanel" layoutY="130.0" prefHeight="411.0" prefWidth="389.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+            <content>
+                <VBox fx:id="chat_VBox" prefHeight="410.0" prefWidth="373.0" style="-fx-background-color: darkblue;" />
+            </content>
+        </ScrollPane>
+        <TextField fx:id="sender" editable="false" layoutX="-1.0" layoutY="78.4" prefHeight="52.0" prefWidth="390.0" style="-fx-background-color: cornflowerblue; -fx-alignment: center; -fx-font-family: haettenschweiler; -fx-font-size: 25;" text="Connected users" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="78.0">
+         <font>
+            <Font name="Haettenschweiler" size="18.0" />
+         </font></TextField>
+    </children>
+</AnchorPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lobby.LobbyController">
+    <children>
+        <BorderPane prefHeight="82.0" prefWidth="390.0" style="-fx-background-color: darkblue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <center>
+                <Label prefHeight="48.0" prefWidth="183.0" style="-fx-text-fill: cornflowerblue;" text="CHATTER BOX" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Haettenschweiler" size="45.0" />
+                    </font>
+                </Label>
+            </center>
+        </BorderPane>
+        <HBox layoutY="79.2" prefHeight="39.0" prefWidth="389.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <Button fx:id="connectedListButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: cornflowerblue;" text="Connected" />
+                <Button fx:id="roomListButton" mnemonicParsing="false" prefHeight="46.0" prefWidth="197.0" style="-fx-background-color: cornflowerblue;" text="Rooms" />
+            </children>
+        </HBox>
+        <VBox layoutY="117.0" prefHeight="380.0" prefWidth="389.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
+            <children>
+                <ListView fx:id="currentLobbyList" prefHeight="379.0" prefWidth="390.0" style="-fx-background-color: darkblue;" />
+            </children>
+        </VBox>
+        <HBox layoutY="524.0" prefHeight="55.0" prefWidth="390.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <Button fx:id="chatButton" disable="true" mnemonicParsing="false" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: darkblue; -fx-text-fill: white;" text="Chat" />
+                <Button fx:id="refreshButton" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: darkblue; -fx-text-fill: white;" text="Refresh" />
+                <Button fx:id="createRoomButton" disable="true" mnemonicParsing="false" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: darkblue; -fx-text-fill: white;" text="Create Room" />
+            </children>
+        </HBox>
+        <TextField fx:id="roomName" layoutX="255.0" layoutY="497.0" prefHeight="26.0" prefWidth="119.0" promptText="Room name" style="-fx-background-color: lightgrey;" />
+    </children>
+</AnchorPane>
