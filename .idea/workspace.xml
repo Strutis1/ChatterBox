@@ -4,21 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
-      <change afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
+    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="Established a connection(doesnt fully work for now)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/chat/chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/registration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/registration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,18 +39,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Strutis1"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Strutis1&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Strutis1/ChatterBox.git",
-    "accountId": "d477f5ed-3f9f-4929-bdfa-e49e54f22d6d"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Strutis1/ChatterBox.git&quot;,
+    &quot;accountId&quot;: &quot;d477f5ed-3f9f-4929-bdfa-e49e54f22d6d&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -64,24 +67,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Client.executor": "Run",
-    "Application.ClientApplication.executor": "Run",
-    "Application.Server.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ClientApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vejas\IdeaProjects\ChatterBox - Chat app\src\main\resources\chat" />
       <recent name="C:\Users\vejas\IdeaProjects\ChatterBox - Chat app\src\main\resources\lobby" />
     </key>
   </component>
@@ -184,7 +189,12 @@
       <option name="presentableId" value="Default" />
       <updated>1731254580169</updated>
       <workItem from="1731254581426" duration="17000" />
-      <workItem from="1731308749804" duration="8632000" />
+      <workItem from="1731308749804" duration="9070000" />
+      <workItem from="1731357245462" duration="4552000" />
+      <workItem from="1731397259143" duration="488000" />
+      <workItem from="1731707112694" duration="462000" />
+      <workItem from="1731847869949" duration="11438000" />
+      <workItem from="1731874752143" duration="3207000" />
     </task>
     <task id="LOCAL-00001" summary="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
       <option name="closed" value="true" />
@@ -194,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731326803578</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Established a connection(doesnt fully work for now)">
+      <option name="closed" value="true" />
+      <created>1731342920261</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731342920263</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +220,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line" />
-    <option name="LAST_COMMIT_MESSAGE" value="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line" />
+    <MESSAGE value="Established a connection" />
+    <MESSAGE value="Established a connection(doesnt fully work for now)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Established a connection(doesnt fully work for now)" />
   </component>
 </project>

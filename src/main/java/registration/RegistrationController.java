@@ -18,50 +18,69 @@ public class RegistrationController {
     private TextField clientUsername;
 
     @FXML
-    private Button registerButton;
+    private Button createButton;
+
+    @FXML
+    private Button joinButton;
+
+    @FXML
+    private TextField roomName;
+
 
 
     public void initialize() {
         clientUsername.setStyle("-fx-background-color: darkblue; -fx-text-fill: white;");
-        registerButton.setOnAction(this::checkUsername);
+        roomName.setStyle("-fx-background-color: darkblue; -fx-text-fill: white;");
+        roomName.setOnAction(this::checkInput);
+        clientUsername.setOnAction(this::checkInput);
+        joinButton.setOnAction(this::handleJoin);
+        createButton.setOnAction(this::handleCreation);
+
     }
 
-    private boolean sendUsername() {
+    private void handleCreation(ActionEvent actionEvent) {
+
+    }
+
+    private void handleJoin(ActionEvent actionEvent) {
+        sendInput();
+        openChat();
+    }
+
+    private void sendInput() {
         try {
-            DataHandler handler = DataHandler.getInstance();
-            handler.setUsername(clientUsername.getText());
-            handler.addConnectedUser(clientUsername.getText());
-            return true;
+            DataHandler.getInstance().setUsername(clientUsername.getText());
+            DataHandler.getInstance().setSelectedChat(roomName.getText());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 
-    private void checkUsername(ActionEvent actionEvent) {
-        if(!clientUsername.getText().isEmpty()){
-            if (sendUsername()) {
-                openLobby();
-            } else {
-                System.out.println("Username could not be sent. Registration failed.");
-            }
-        } else {
-            System.out.println("Please enter a valid username.");
+    private void checkInput(ActionEvent actionEvent) {
+        if(!clientUsername.getText().isEmpty() && !roomName.getText().isEmpty()) {
+            joinButton.setDisable(false);
+            createButton.setDisable(false);
+        }
+        else{
+            joinButton.setDisable(true);
+            createButton.setDisable(true);
         }
     }
 
-    private void openLobby() {
+    //todo change to chat instead
+
+    private void openChat() {
         try {
-            FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby/lobby.fxml"));
-            Parent clientRoot = lobbyLoader.load();
+            FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("/chat/chat.fxml"));
+            Parent clientRoot = chatLoader.load();
 
             Stage clientStage = new Stage();
             Scene clientScene = new Scene(clientRoot, 389, 578);
-            clientStage.setTitle("ChatterBox-lobby");
+            clientStage.setTitle("ChatterBox");
             clientStage.setScene(clientScene);
             clientStage.show();
 
-            Stage currentStage = (Stage) registerButton.getScene().getWindow();
+            Stage currentStage = (Stage) joinButton.getScene().getWindow();
             currentStage.close();
         } catch (IOException e) {
             e.printStackTrace();

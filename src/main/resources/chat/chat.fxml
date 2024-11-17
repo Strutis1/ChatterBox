@@ -36,6 +36,9 @@
                 <VBox fx:id="chat_VBox" prefHeight="408.0" prefWidth="388.0" style="-fx-background-color: darkblue;" />
             </content>
         </ScrollPane>
-        <TextField fx:id="sender" editable="false" layoutX="-1.0" layoutY="78.4" prefHeight="52.0" prefWidth="390.0" style="-fx-background-color: cornflowerblue; -fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="78.0" />
+        <TextField fx:id="sender" alignment="CENTER" editable="false" layoutY="78.4" prefHeight="52.0" prefWidth="390.0" style="-fx-font-family: haettenschweiler; -fx-alignment: center; -fx-font-size: 24; -fx-background-color: cornflowerblue; -fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="78.0">
+         <font>
+            <Font name="Haettenschweiler" size="24.0" />
+         </font></TextField>
     </children>
 </AnchorPane>

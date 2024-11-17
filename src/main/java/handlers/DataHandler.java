@@ -49,4 +49,11 @@ public final class DataHandler {
         connectedUsers.remove(username);
     }
 
+    public String getSelectedChat() {
+        return selectedChat;
+    }
+
+    public void setSelectedChat(String selectedChat) {
+        this.selectedChat = selectedChat;
+    }
 }

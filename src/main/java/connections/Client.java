@@ -2,13 +2,10 @@ package connections;
 
 import chat.ChatController;
 import handlers.DataHandler;
-import javafx.application.Platform;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.List;
 
 public class Client {
     private String username;
@@ -22,9 +19,23 @@ public class Client {
             this.socket = localhost;
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            sendUsername(DataHandler.getInstance().getUsername());
+            sendRoomName(DataHandler.getInstance().getSelectedChat());
         } catch(IOException e) {
             e.printStackTrace();
             close(localhost, reader, writer);
+        }
+    }
+
+    private void sendRoomName(String selectedChat) {
+        try {
+            writer.write("ROOMNAME:" + selectedChat);
+            writer.newLine();
+            writer.flush();
+        }catch(IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldnt send room name" + selectedChat);
+            close(socket, reader, writer);
         }
     }
 
@@ -44,25 +55,37 @@ public class Client {
         }
     }
 
-//    public void receiveMessage(VBox chatVBox) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (socket.isConnected()) {
-//                    String message = null;
-//                    try {
-//                        message = reader.readLine();
-//                        if (message != null) {
-//                            ChatCController.receiveMessage(message, chatVBox);
-//                        }
-//                    }catch(IOException e) {
-//                        e.printStackTrace();
-//                        break;
-//                    }
-//                }
-//            }
-//        }).start();
-//    }
+    public void receiveMessage(VBox chatVBox) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (socket.isConnected()) {
+                    String message = null;
+                    try {
+                        message = reader.readLine();
+                        if (message != null) {
+                            ChatController.receiveMessage(message, chatVBox);
+                        }
+                    }catch(IOException e) {
+                        e.printStackTrace();
+                        break;
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public void sendUsername(String username){
+        try {
+            writer.write("USERNAME:" + username);
+            writer.newLine();
+            writer.flush();
+        }catch(IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldnt send username" + username);
+            close(socket, reader, writer);
+        }
+    }
 
 
     public void sendMessage(String messageToSend) {

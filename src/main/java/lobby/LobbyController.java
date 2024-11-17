@@ -61,7 +61,7 @@ public class LobbyController {
                 else if(currentLobbyList.getSelectionModel().getSelectedItems().size() > 1) {
                     chatButton.setDisable(true);
                     createRoomButton.setDisable(false);
-            }
+                }
             }else{
                 chatButton.setDisable(true);
                 createRoomButton.setDisable(true);
