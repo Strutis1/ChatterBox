@@ -2,14 +2,26 @@ package handlers;
 
 import connections.Server;
 
-import java.net.Socket;
+import java.util.Set;
 
-public class RoomHandler {
-    Socket socket;
-    Server server;
+public class RoomHandler implements Runnable {
 
-    public RoomHandler(Socket socket, Server server) {
-        this.socket = socket;
+    private String roomName;
+    private Set<ClientHandler> participants;
+    private Server server;
+
+    public RoomHandler(String name, Server server) {
+        this.roomName = name;
         this.server = server;
+    }
+
+    public void addMember(ClientHandler clientHandler){
+        participants.add(clientHandler);
+    }
+
+
+    @Override
+    public void run() {
+
     }
 }

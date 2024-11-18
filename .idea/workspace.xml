@@ -8,19 +8,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/chat/chat.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/registration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/registration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,6 +191,8 @@
       <workItem from="1731707112694" duration="462000" />
       <workItem from="1731847869949" duration="11438000" />
       <workItem from="1731874752143" duration="3207000" />
+      <workItem from="1731928481222" duration="6667000" />
+      <workItem from="1731942444790" duration="5032000" />
     </task>
     <task id="LOCAL-00001" summary="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
       <option name="closed" value="true" />

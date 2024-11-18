@@ -12,7 +12,8 @@ public class ClientHandler implements Runnable {
     private Server server;
     private BufferedReader reader;
     private BufferedWriter writer;
-    private String clientName;
+    private RoomHandler currentRoom;
+
 
     public ClientHandler(Socket socket, Server server) {
         this.socket = socket;
@@ -30,8 +31,49 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-
+        String message;
+        try {
+            while ((message = reader.readLine()) != null) {
+                if (message.equals("REQUEST REFRESH")) {
+                    handleRequestRefresh();
+                }
+            }
+        } catch (IOException e) {
+            closeConnections();
+        }
     }
+
+    private void handleRequestRefresh() {
+        try {
+            Set<String> connectedUsers = server.getConnectedUserNames();
+            Set<String> rooms = server.getCreatedRooms();
+
+            String response = "CONNECTED_USERS:";
+            if (!connectedUsers.isEmpty()) {
+                for (String user : connectedUsers) {
+                    response += user + ",";
+                }
+                response = response.substring(0, response.length() - 1);
+            }
+            response += "\nROOMS:";
+            if (!rooms.isEmpty()) {
+                for (String room : rooms) {
+                    response += room + ",";
+                }
+                response = response.substring(0, response.length() - 1);
+            }
+
+            writer.write(response);
+            writer.newLine();
+            writer.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            closeConnections();
+        }
+    }
+
+
 
     private void closeConnections() {
         try {
@@ -40,17 +82,6 @@ public class ClientHandler implements Runnable {
             if (socket != null) socket.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void sendMessage(String message) {
-        try {
-            writer.write(message);
-            writer.newLine();
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            closeConnections();
         }
     }
 }

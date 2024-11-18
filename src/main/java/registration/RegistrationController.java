@@ -1,16 +1,20 @@
 package registration;
 
+import connections.Client;
 import handlers.DataHandler;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class RegistrationController {
 
@@ -18,70 +22,68 @@ public class RegistrationController {
     private TextField clientUsername;
 
     @FXML
-    private Button createButton;
-
-    @FXML
     private Button joinButton;
 
-    @FXML
-    private TextField roomName;
+    private Client client;
+
 
 
 
     public void initialize() {
         clientUsername.setStyle("-fx-background-color: darkblue; -fx-text-fill: white;");
-        roomName.setStyle("-fx-background-color: darkblue; -fx-text-fill: white;");
-        roomName.setOnAction(this::checkInput);
         clientUsername.setOnAction(this::checkInput);
         joinButton.setOnAction(this::handleJoin);
-        createButton.setOnAction(this::handleCreation);
-
-    }
-
-    private void handleCreation(ActionEvent actionEvent) {
 
     }
 
     private void handleJoin(ActionEvent actionEvent) {
         sendInput();
-        openChat();
+
+        try {
+            client = new Client(new Socket("localhost", 1234));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Platform.runLater(() -> {
+            DataHandler.getInstance().setClient(client);
+            openChat();
+        });
+
     }
 
     private void sendInput() {
         try {
             DataHandler.getInstance().setUsername(clientUsername.getText());
-            DataHandler.getInstance().setSelectedChat(roomName.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void checkInput(ActionEvent actionEvent) {
-        if(!clientUsername.getText().isEmpty() && !roomName.getText().isEmpty()) {
+        if(!clientUsername.getText().isEmpty()) {
             joinButton.setDisable(false);
-            createButton.setDisable(false);
         }
         else{
             joinButton.setDisable(true);
-            createButton.setDisable(true);
         }
     }
 
-    //todo change to chat instead
 
     private void openChat() {
         try {
-            FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("/chat/chat.fxml"));
-            Parent clientRoot = chatLoader.load();
+            FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby/lobby.fxml"));
+            Parent lobbyRoot = lobbyLoader.load();
 
-            Stage clientStage = new Stage();
-            Scene clientScene = new Scene(clientRoot, 389, 578);
-            clientStage.setTitle("ChatterBox");
-            clientStage.setScene(clientScene);
-            clientStage.show();
+            Stage lobbyStage = new Stage();
+            Scene lobbyScene = new Scene(lobbyRoot, 389, 578);
+            lobbyStage.setTitle("ChatterBox-lobby");
+            lobbyStage.setScene(lobbyScene);
+            lobbyStage.show();
 
-            Stage currentStage = (Stage) joinButton.getScene().getWindow();
-            currentStage.close();
+            Platform.runLater(() -> {
+                Stage currentStage = (Stage) joinButton.getScene().getWindow();
+                currentStage.close();
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

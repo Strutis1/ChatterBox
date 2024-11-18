@@ -32,14 +32,22 @@ public class Server {
 
 
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
-                RoomHandler roomHandler = new RoomHandler(clientSocket, this);
+                RoomHandler roomHandler;
 
                 String username = receiveUser();
-                String roomName = receiveRoomName();
+//                String roomName = receiveRoomName();
+
+//                if(!rooms.containsKey(roomName)) {
+//                    roomHandler = new RoomHandler(roomName, this);
+//                    roomHandler.addMember(clientHandler);
+//                    rooms.put(roomName, roomHandler);
+//                } else{
+//                    roomHandler = rooms.get(roomName);
+//                    roomHandler.addMember(clientHandler);
+//                }
 
 
                 connectedClients.put(username, clientHandler);
-                rooms.put(roomName, roomHandler);
                 new Thread(clientHandler).start();
             }
         } catch (IOException e) {
@@ -62,20 +70,20 @@ public class Server {
         }
     }
 
-    public String receiveRoomName(){
-        try {
-            String str = reader.readLine();
-            System.out.println("Received from client: " + str);
-            if(str.startsWith("ROOMNAME:")){
-                return str.replace("ROOMNAME:", "");
-            }
-            throw new IOException("cant send room name");
-        } catch (IOException e) {
-            e.printStackTrace();
-            close(serverSocket, reader, writer);
-            return "";
-        }
-    }
+//    public String receiveRoomName(){
+//        try {
+//            String str = reader.readLine();
+//            System.out.println("Received from client: " + str);
+//            if(str.startsWith("ROOMNAME:")){
+//                return str.replace("ROOMNAME:", "");
+//            }
+//            throw new IOException("cant send room name");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            close(serverSocket, reader, writer);
+//            return "";
+//        }
+//    }
 
 
     public void close(ServerSocket socket, BufferedReader reader, BufferedWriter writer) {

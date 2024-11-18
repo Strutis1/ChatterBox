@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crew.mif.chatterbox.ServerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crew.mif.chatterbox.ServerController">
     <children>
-        <BorderPane prefHeight="82.0" prefWidth="390.0" style="-fx-background-color: darkblue;" AnchorPane.bottomAnchor="496.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane prefHeight="82.0" prefWidth="390.0" style="-fx-background-color: darkblue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <center>
-                <Label prefHeight="48.0" prefWidth="185.0" style="-fx-text-fill: cornflowerblue;" text="CHATTER BOX" BorderPane.alignment="CENTER">
+                <Label prefHeight="48.0" prefWidth="183.0" style="-fx-text-fill: cornflowerblue;" text="CHATTER BOX" BorderPane.alignment="CENTER">
                     <font>
                         <Font name="Haettenschweiler" size="45.0" />
                     </font>
                 </Label>
             </center>
         </BorderPane>
-        <ScrollPane fx:id="scrollPanel" layoutX="0.8" layoutY="130.0" prefHeight="453.0" prefWidth="390.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="130.0">
-            <content>
-                <VBox fx:id="chat_VBox" prefHeight="450.0" prefWidth="388.0" style="-fx-background-color: darkblue;" />
-            </content>
-        </ScrollPane>
-        <TextField fx:id="sender" editable="false" layoutX="-1.0" layoutY="78.4" prefHeight="52.0" prefWidth="390.0" style="-fx-background-color: cornflowerblue; -fx-alignment: center; -fx-font-family: haettenschweiler; -fx-font-size: 25;" text="Connected users" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="78.0">
-         <font>
-            <Font name="Haettenschweiler" size="18.0" />
-         </font></TextField>
+        <HBox layoutY="79.2" prefHeight="39.0" prefWidth="389.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <Button fx:id="connectedListButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: cornflowerblue; -fx-font-family: haettenschweiller; -fx-text-fill: white; -fx-font-size: 18;" text="Users" />
+                <Button fx:id="roomListButton" mnemonicParsing="false" prefHeight="46.0" prefWidth="197.0" style="-fx-background-color: cornflowerblue; -fx-font-family: haettenschweiller; -fx-font-size: 18; -fx-text-fill: white;" text="Rooms" />
+            </children>
+        </HBox>
+        <VBox layoutY="117.0" prefHeight="404.0" prefWidth="389.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="117.0">
+            <children>
+                <ListView fx:id="currentLobbyList" prefHeight="403.0" prefWidth="390.0" />
+            </children>
+        </VBox>
+        <HBox layoutY="518.0" prefHeight="62.0" prefWidth="390.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0">
+            <children>
+                <Button fx:id="refreshButton" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="390.0" style="-fx-background-color: cornflowerblue; -fx-text-fill: white; -fx-font-family: haettenschweiller; -fx-font-size: 18;" text="Refresh" />
+            </children>
+        </HBox>
     </children>
 </AnchorPane>

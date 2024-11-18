@@ -2,10 +2,16 @@ package connections;
 
 import chat.ChatController;
 import handlers.DataHandler;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
+
+import static javafx.collections.FXCollections.observableList;
 
 public class Client {
     private String username;
@@ -20,7 +26,6 @@ public class Client {
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             sendUsername(DataHandler.getInstance().getUsername());
-            sendRoomName(DataHandler.getInstance().getSelectedChat());
         } catch(IOException e) {
             e.printStackTrace();
             close(localhost, reader, writer);
@@ -28,15 +33,7 @@ public class Client {
     }
 
     private void sendRoomName(String selectedChat) {
-        try {
-            writer.write("ROOMNAME:" + selectedChat);
-            writer.newLine();
-            writer.flush();
-        }catch(IOException e) {
-            e.printStackTrace();
-            System.out.println("Couldnt send room name" + selectedChat);
-            close(socket, reader, writer);
-        }
+            sendMessage("ROOMNAME:" + selectedChat);
     }
 
     public void close(Socket socket, BufferedReader reader, BufferedWriter writer) {
@@ -75,17 +72,41 @@ public class Client {
         }).start();
     }
 
-    public void sendUsername(String username){
-        try {
-            writer.write("USERNAME:" + username);
-            writer.newLine();
-            writer.flush();
-        }catch(IOException e) {
-            e.printStackTrace();
-            System.out.println("Couldnt send username" + username);
-            close(socket, reader, writer);
-        }
+    public void receiveLobbyList(){
+            String messageOne = null;
+            String messageTwo = null;
+            try {
+                messageOne = reader.readLine();
+                messageTwo = reader.readLine();
+
+                if(messageOne.startsWith("CONNECTED_USERS:"))
+                    messageOne = messageOne.replace("CONNECTED_USERS:", "");
+
+                if(messageOne.startsWith("ROOMS:"))
+                    messageTwo = messageTwo.replace("ROOMS:", "");
+
+                ObservableList<String> connectedUsers = FXCollections.observableArrayList(
+                        messageOne != null ? messageOne.split(",") : new String[0]
+                );
+                ObservableList<String> createdRooms = FXCollections.observableArrayList(
+                        messageTwo != null ? messageTwo.split(",") : new String[0]
+                );
+
+                Platform.runLater(() -> {
+                    DataHandler.getInstance().setConnectedUsers(connectedUsers);
+                    DataHandler.getInstance().setCreatedRooms(createdRooms);
+                });
+            }catch(IOException e) {
+                e.printStackTrace();
+            }
     }
+
+
+
+    public void sendUsername(String username){
+            sendMessage("USERNAME:" + username);
+    }
+
 
 
     public void sendMessage(String messageToSend) {
@@ -115,5 +136,9 @@ public class Client {
 
     public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    public void requestRefresh() {
+        sendMessage("REQUEST REFRESH");
     }
 }

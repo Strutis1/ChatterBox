@@ -1,13 +1,20 @@
 package lobby;
 
+import connections.Client;
 import handlers.DataHandler;
-import javafx.collections.ListChangeListener;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LobbyController {
 
@@ -36,14 +43,19 @@ public class LobbyController {
 
     private boolean selectedConnected;
 
+    private Client client;
+
 
     public void initialize(){
+
+        client = DataHandler.getInstance().getClient();
+        client.requestRefresh();
 
         lobbyList = new LobbyList(currentLobbyList);
         lobbyList.getClientList().setAll(DataHandler.getInstance().getConnectedUsers());
         currentLobbyList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-
+        lobbyList.showConnectedList();
 
         chatButton.setOnAction(this::handleChat);
         connectedListButton.setOnAction(this::showConnected);
@@ -60,19 +72,12 @@ public class LobbyController {
                 }
                 else if(currentLobbyList.getSelectionModel().getSelectedItems().size() > 1) {
                     chatButton.setDisable(true);
-                    createRoomButton.setDisable(false);
+                    if(!roomName.getText().isEmpty())
+                        createRoomButton.setDisable(false);
                 }
             }else{
                 chatButton.setDisable(true);
                 createRoomButton.setDisable(true);
-            }
-        });
-
-        DataHandler.getInstance().getConnectedUsers().addListener((ListChangeListener<String>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    lobbyList.getClientList().setAll(DataHandler.getInstance().getConnectedUsers());
-                }
             }
         });
     }
@@ -86,12 +91,20 @@ public class LobbyController {
     }
 
     private void handleRefresh(ActionEvent actionEvent) {
-
+        client.sendMessage("REQUEST REFRESH");
+        client.receiveLobbyList();
+        updateLobby();
     }
 
+    private void updateLobby() {
+        lobbyList.getClientList().setAll(DataHandler.getInstance().getConnectedUsers());
+        lobbyList.getRoomList().setAll(DataHandler.getInstance().getCreatedRooms());
+    }
+
+    //todo add to handler if we create a room
     private void handleRoomCreation(ActionEvent actionEvent) {
         if(!roomName.getText().isEmpty()){
-
+            client.sendMessage("CREATED ROOM:" + roomName.getText());
         }
     }
 
@@ -103,7 +116,18 @@ public class LobbyController {
     }
 
     private void handleChat(ActionEvent actionEvent) {
+        try {
+            FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("/chat/chat.fxml"));
+            Parent chatRoot = chatLoader.load();
 
+            Stage chatStage = new Stage();
+            Scene chatScene = new Scene(chatRoot, 389, 578);
+            chatStage.setTitle("ChatterBox-lobby");
+            chatStage.setScene(chatScene);
+            chatStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 }

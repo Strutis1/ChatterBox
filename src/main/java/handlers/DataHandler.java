@@ -1,6 +1,7 @@
 package handlers;
 
 
+import connections.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,6 +14,18 @@ public final class DataHandler {
     private String username;
     private String selectedChat;
     private ObservableList<String> connectedUsers = FXCollections.observableArrayList();
+
+    private ObservableList<String> createdRooms = FXCollections.observableArrayList();
+    private Client client;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
 
     private final static DataHandler INSTANCE = new DataHandler();
 
@@ -55,5 +68,17 @@ public final class DataHandler {
 
     public void setSelectedChat(String selectedChat) {
         this.selectedChat = selectedChat;
+    }
+
+    public ObservableList<String> getCreatedRooms() {
+        return createdRooms;
+    }
+
+    public void setCreatedRooms(ObservableList<String> createdRooms) {
+        this.createdRooms = createdRooms;
+    }
+
+    public void setConnectedUsers(ObservableList<String> connectedUsers) {
+        this.connectedUsers = connectedUsers;
     }
 }
