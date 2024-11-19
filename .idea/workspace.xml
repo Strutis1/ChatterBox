@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="Established a connection(doesnt fully work for now)">
+    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="Server receives usernames, but so does the client so that they can choose who to chat with later, added a lobby">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/DataHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/registration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/registration.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +185,8 @@
       <workItem from="1731847869949" duration="11438000" />
       <workItem from="1731874752143" duration="3207000" />
       <workItem from="1731928481222" duration="6667000" />
-      <workItem from="1731942444790" duration="5032000" />
+      <workItem from="1731942444790" duration="6028000" />
+      <workItem from="1732003406391" duration="3691000" />
     </task>
     <task id="LOCAL-00001" summary="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
       <option name="closed" value="true" />
@@ -210,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731342920263</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Server receives usernames, but so does the client so that they can choose who to chat with later, added a lobby">
+      <option name="closed" value="true" />
+      <created>1731947990210</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731947990210</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +222,7 @@
     <MESSAGE value="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line" />
     <MESSAGE value="Established a connection" />
     <MESSAGE value="Established a connection(doesnt fully work for now)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Established a connection(doesnt fully work for now)" />
+    <MESSAGE value="Server receives usernames, but so does the client so that they can choose who to chat with later, added a lobby" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server receives usernames, but so does the client so that they can choose who to chat with later, added a lobby" />
   </component>
 </project>

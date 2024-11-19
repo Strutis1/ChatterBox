@@ -18,6 +18,11 @@ import java.io.IOException;
 
 public class LobbyController {
 
+    //todo show connected list right after start
+    //todo update lists right after changes no need for refresh
+    //todo remove users or rooms
+
+
     @FXML
     private Button chatButton;
 
@@ -53,7 +58,6 @@ public class LobbyController {
 
         lobbyList = new LobbyList(currentLobbyList);
         lobbyList.getClientList().setAll(DataHandler.getInstance().getConnectedUsers());
-        currentLobbyList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         lobbyList.showConnectedList();
 
@@ -62,24 +66,29 @@ public class LobbyController {
         createRoomButton.setOnAction(this::handleRoomCreation);
         refreshButton.setOnAction(this::handleRefresh);
         roomListButton.setOnAction(this::showRooms);
+        roomName.setOnAction(this::handleRoomName);
 
 
         currentLobbyList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 if (currentLobbyList.getSelectionModel().getSelectedItems().size() == 1) {
                     chatButton.setDisable(false);
-                    createRoomButton.setDisable(true);
                 }
                 else if(currentLobbyList.getSelectionModel().getSelectedItems().size() > 1) {
                     chatButton.setDisable(true);
-                    if(!roomName.getText().isEmpty())
-                        createRoomButton.setDisable(false);
                 }
             }else{
                 chatButton.setDisable(true);
-                createRoomButton.setDisable(true);
             }
         });
+    }
+
+    private void handleRoomName(ActionEvent actionEvent) {
+        if(!roomName.getText().isEmpty()) {
+            createRoomButton.setDisable(false);
+        } else{
+            createRoomButton.setDisable(true);
+        }
     }
 
 
@@ -105,6 +114,7 @@ public class LobbyController {
     private void handleRoomCreation(ActionEvent actionEvent) {
         if(!roomName.getText().isEmpty()){
             client.sendMessage("CREATED ROOM:" + roomName.getText());
+            Platform.runLater(this::updateLobby);
         }
     }
 

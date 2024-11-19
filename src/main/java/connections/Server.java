@@ -15,6 +15,7 @@ public class Server {
     private ServerSocket serverSocket;
     private BufferedReader reader;
     private BufferedWriter writer;
+
     private Map<String, ClientHandler> connectedClients = new HashMap<>();
     private Map<String, RoomHandler> rooms = new HashMap<>();
 
@@ -108,5 +109,21 @@ public class Server {
 
     public Set<String> getCreatedRooms(){
         return rooms.keySet();
+    }
+
+    public Map<String, ClientHandler> getConnectedClients() {
+        return connectedClients;
+    }
+
+    public void setConnectedClients(Map<String, ClientHandler> connectedClients) {
+        this.connectedClients = connectedClients;
+    }
+
+    public Map<String, RoomHandler> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Map<String, RoomHandler> rooms) {
+        this.rooms = rooms;
     }
 }

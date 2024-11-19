@@ -82,7 +82,7 @@ public class Client {
                 if(messageOne.startsWith("CONNECTED_USERS:"))
                     messageOne = messageOne.replace("CONNECTED_USERS:", "");
 
-                if(messageOne.startsWith("ROOMS:"))
+                if(messageTwo.startsWith("ROOMS:"))
                     messageTwo = messageTwo.replace("ROOMS:", "");
 
                 ObservableList<String> connectedUsers = FXCollections.observableArrayList(
@@ -137,6 +137,7 @@ public class Client {
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
+
 
     public void requestRefresh() {
         sendMessage("REQUEST REFRESH");

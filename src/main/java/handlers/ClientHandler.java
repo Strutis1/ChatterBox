@@ -37,9 +37,21 @@ public class ClientHandler implements Runnable {
                 if (message.equals("REQUEST REFRESH")) {
                     handleRequestRefresh();
                 }
+                if(message.startsWith("CREATED ROOM:")){
+                    handleRoomCreation(message);
+                }
             }
         } catch (IOException e) {
             closeConnections();
+        }
+    }
+
+    private void handleRoomCreation(String room){
+        try{
+            String roomName = room.replace("CREATED ROOM:", "");
+            server.getRooms().put(roomName, new RoomHandler(roomName, server));
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

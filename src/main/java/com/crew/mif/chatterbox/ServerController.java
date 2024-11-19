@@ -55,7 +55,6 @@ public class ServerController {
     }
 
     private void handleRefresh(ActionEvent actionEvent) {
-        //can refresh both but for now lets only refresh clients i havent got to rooms yet
             lobbyList.getClientList().clear();
             lobbyList.getClientList().setAll(server.getConnectedUserNames());
             lobbyList.getRoomList().setAll(server.getCreatedRooms());
