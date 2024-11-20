@@ -54,9 +54,9 @@ public class LobbyController {
 
         client = DataHandler.getInstance().getClient();
         client.requestRefresh();
+        updateLobby();
 
         lobbyList = new LobbyList(currentLobbyList);
-        lobbyList.getClientList().setAll(DataHandler.getInstance().getConnectedUsers());
 
         lobbyList.showConnectedList();
 
@@ -72,9 +72,6 @@ public class LobbyController {
             if (newValue != null) {
                 if (currentLobbyList.getSelectionModel().getSelectedItems().size() == 1) {
                     chatButton.setDisable(false);
-                }
-                else if(currentLobbyList.getSelectionModel().getSelectedItems().size() > 1) {
-                    chatButton.setDisable(true);
                 }
             }else{
                 chatButton.setDisable(true);

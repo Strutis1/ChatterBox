@@ -2,7 +2,7 @@ package connections;
 
 import handlers.ClientHandler;
 import handlers.RoomHandler;
-import javafx.application.Platform;
+import lobby.LobbyList;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -21,8 +21,11 @@ public class Server {
     private Map<String, ClientHandler> connectedClients = new HashMap<>();
     private Map<String, RoomHandler> rooms = new HashMap<>();
 
-    public Server(ServerSocket serverSocket) {
+    private LobbyList lobbyList;
+
+    public Server(ServerSocket serverSocket, LobbyList lobbyList) {
         this.serverSocket = serverSocket;
+        this.lobbyList = lobbyList;
     }
 
     public void startServer() {
@@ -52,9 +55,13 @@ public class Server {
 
 
                 connectedClients.put(username, clientHandler);
+                lobbyList.addClient(username);
                 new Thread(clientHandler).start();
+
+                broadcastConnectedUsers();
             }
         } catch (IOException e) {
+            close();
             e.printStackTrace();
         }
     }
@@ -68,7 +75,7 @@ public class Server {
             throw new IOException("cant send username");
         } catch (IOException e) {
             e.printStackTrace();
-            close(serverSocket, reader, writer);
+            close();
             return "";
         }
     }
@@ -89,7 +96,8 @@ public class Server {
 //    }
 
 
-    public void close(ServerSocket socket, BufferedReader reader, BufferedWriter writer) {
+
+    public void close() {
         try {
             if (reader != null) {
                 reader.close();
@@ -97,8 +105,8 @@ public class Server {
             if (writer != null) {
                 writer.close();
             }
-            if (socket != null) {
-                socket.close();
+            if (serverSocket != null) {
+                serverSocket.close();
             }
         }catch(IOException e) {
             e.printStackTrace();
@@ -109,10 +117,6 @@ public class Server {
         return connectedClients.keySet();
     }
 
-
-    //Trying to add that the client cant see themselves in list and therefore cant to themsleves later on, but somethin
-
-    //todo fix this !!!
     public Set<String> getOtherConnectedUserNames(ClientHandler clientHandler){
         Map<String, ClientHandler> temp = new HashMap<>(connectedClients);
         temp.remove(clientHandler.getClientUsername());
@@ -138,6 +142,38 @@ public class Server {
 
     public void setRooms(Map<String, RoomHandler> rooms) {
         this.rooms = rooms;
+    }
+
+    public void broadcastConnectedUsers() {
+        Set<String> connectedUsernames = getConnectedUserNames();
+        Set<String> createdRooms = getCreatedRooms();
+
+        for (Map.Entry<String, ClientHandler> entry : connectedClients.entrySet()) {
+            String clientUsername = entry.getKey();
+            ClientHandler clientHandler = entry.getValue();
+
+            String messageToSend = "CONNECTED_USERS:";
+            for (String username : connectedUsernames) {
+                if (!username.equals(clientUsername)) {
+                    messageToSend += username + ",";
+                }
+            }
+
+            if (messageToSend.endsWith(",")) {
+                messageToSend = messageToSend.substring(0, messageToSend.length() - 1);
+            }
+
+            messageToSend += "\nROOMS:";
+            for (String room : createdRooms) {
+                messageToSend += room + ",";
+            }
+
+            if (messageToSend.endsWith(",")) {
+                messageToSend = messageToSend.substring(0, messageToSend.length() - 1);
+            }
+
+            clientHandler.sendMessage(messageToSend);
+        }
     }
 
 }

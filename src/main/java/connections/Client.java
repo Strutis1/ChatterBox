@@ -19,13 +19,13 @@ public class Client {
     private BufferedReader reader;
     private BufferedWriter writer;
 
-
     public Client(Socket localhost) {
         try {
             this.socket = localhost;
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             sendUsername(DataHandler.getInstance().getUsername());
+            receiveLobbyList();
         } catch(IOException e) {
             e.printStackTrace();
             close(localhost, reader, writer);
@@ -72,33 +72,41 @@ public class Client {
         }).start();
     }
 
+
+
     public void receiveLobbyList(){
-            String messageOne = null;
-            String messageTwo = null;
-            try {
-                messageOne = reader.readLine();
-                messageTwo = reader.readLine();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-                if(messageOne.startsWith("CONNECTED_USERS:"))
-                    messageOne = messageOne.replace("CONNECTED_USERS:", "");
+                String messageOne = null;
+                String messageTwo = null;
+                try {
+                    messageOne = reader.readLine();
+                    messageTwo = reader.readLine();
 
-                if(messageTwo.startsWith("ROOMS:"))
-                    messageTwo = messageTwo.replace("ROOMS:", "");
+                    if (messageOne.startsWith("CONNECTED_USERS:"))
+                        messageOne = messageOne.replace("CONNECTED_USERS:", "");
 
-                ObservableList<String> connectedUsers = FXCollections.observableArrayList(
-                        messageOne != null ? messageOne.split(",") : new String[0]
-                );
-                ObservableList<String> createdRooms = FXCollections.observableArrayList(
-                        messageTwo != null ? messageTwo.split(",") : new String[0]
-                );
+                    if (messageTwo.startsWith("ROOMS:"))
+                        messageTwo = messageTwo.replace("ROOMS:", "");
 
-                Platform.runLater(() -> {
-                    DataHandler.getInstance().setConnectedUsers(connectedUsers);
-                    DataHandler.getInstance().setCreatedRooms(createdRooms);
-                });
-            }catch(IOException e) {
-                e.printStackTrace();
+                    ObservableList<String> connectedUsers = FXCollections.observableArrayList(
+                            messageOne != null ? messageOne.split(",") : new String[0]
+                    );
+                    ObservableList<String> createdRooms = FXCollections.observableArrayList(
+                            messageTwo != null ? messageTwo.split(",") : new String[0]
+                    );
+
+                    Platform.runLater(() -> {
+                        DataHandler.getInstance().setConnectedUsers(connectedUsers);
+                        DataHandler.getInstance().setCreatedRooms(createdRooms);
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        }).start();
     }
 
 

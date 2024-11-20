@@ -1,6 +1,7 @@
 package lobby;
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
@@ -47,7 +48,10 @@ public class LobbyList {
     }
 
     public void addClient(String client) {
-        clientList.add(client);
+        System.out.println("Adding: " + client);
+        Platform.runLater(() ->{
+            clientList.add(client);
+        });
     }
 
     public void addRoom(String roomName) {

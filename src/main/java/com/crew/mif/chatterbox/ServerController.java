@@ -35,7 +35,7 @@ public class ServerController {
         lobbyList = new LobbyList(currentLobbyList);
         new Thread(() -> {
             try {
-                server = new Server(new ServerSocket(1234));
+                server = new Server(new ServerSocket(1234), lobbyList);
                 server.startServer();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -44,6 +44,8 @@ public class ServerController {
         connectedListButton.setOnAction(this::showConnected);
         refreshButton.setOnAction(this::handleRefresh);
         roomListButton.setOnAction(this::showRooms);
+
+
 
     }
 

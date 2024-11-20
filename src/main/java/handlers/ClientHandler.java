@@ -11,6 +11,7 @@ public class ClientHandler implements Runnable {
     private Socket socket;
     private Server server;
     private BufferedReader reader;
+
     private BufferedWriter writer;
 
     private String clientUsername;
@@ -62,7 +63,6 @@ public class ClientHandler implements Runnable {
     }
 
     private void handleRefreshRequest() {
-        try {
             Set<String> otherConnectedUsers = server.getOtherConnectedUserNames(this);
             Set<String> rooms = server.getCreatedRooms();
 
@@ -81,14 +81,7 @@ public class ClientHandler implements Runnable {
                 response = response.substring(0, response.length() - 1);
             }
 
-            writer.write(response);
-            writer.newLine();
-            writer.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            close();
-        }
+            sendMessage(response);
     }
 
 
@@ -102,6 +95,19 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
+
+
+    public void sendMessage(String message) {
+        try {
+            writer.write(message);
+            writer.newLine();
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+            close();
+        }
+    }
+
 
 
     public String getClientUsername() {
