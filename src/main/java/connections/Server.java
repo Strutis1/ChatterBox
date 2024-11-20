@@ -16,6 +16,8 @@ public class Server {
     private BufferedReader reader;
     private BufferedWriter writer;
 
+    //todo can add a listener to rooms and then start room thread after someone creates a room
+
     private Map<String, ClientHandler> connectedClients = new HashMap<>();
     private Map<String, RoomHandler> rooms = new HashMap<>();
 
@@ -31,11 +33,12 @@ public class Server {
                 this.reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 this.writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
+                String username = receiveUser();
 
-                ClientHandler clientHandler = new ClientHandler(clientSocket, this);
+
+                ClientHandler clientHandler = new ClientHandler(username, clientSocket, this);
                 RoomHandler roomHandler;
 
-                String username = receiveUser();
 //                String roomName = receiveRoomName();
 
 //                if(!rooms.containsKey(roomName)) {
@@ -59,7 +62,6 @@ public class Server {
     public String receiveUser(){
         try {
             String str = reader.readLine();
-            System.out.println("Received from client: " + str);
             if(str.startsWith("USERNAME:")){
                 return str.replace("USERNAME:", "");
             }
@@ -107,6 +109,17 @@ public class Server {
         return connectedClients.keySet();
     }
 
+
+    //Trying to add that the client cant see themselves in list and therefore cant to themsleves later on, but somethin
+
+    //todo fix this !!!
+    public Set<String> getOtherConnectedUserNames(ClientHandler clientHandler){
+        Map<String, ClientHandler> temp = new HashMap<>(connectedClients);
+        temp.remove(clientHandler.getClientUsername());
+
+        return temp.keySet();
+    }
+
     public Set<String> getCreatedRooms(){
         return rooms.keySet();
     }
@@ -126,4 +139,5 @@ public class Server {
     public void setRooms(Map<String, RoomHandler> rooms) {
         this.rooms = rooms;
     }
+
 }

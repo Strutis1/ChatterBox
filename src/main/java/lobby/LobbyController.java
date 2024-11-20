@@ -18,7 +18,6 @@ import java.io.IOException;
 
 public class LobbyController {
 
-    //todo show connected list right after start
     //todo update lists right after changes no need for refresh
     //todo remove users or rooms
 

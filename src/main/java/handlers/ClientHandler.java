@@ -12,10 +12,13 @@ public class ClientHandler implements Runnable {
     private Server server;
     private BufferedReader reader;
     private BufferedWriter writer;
+
+    private String clientUsername;
     private RoomHandler currentRoom;
 
 
-    public ClientHandler(Socket socket, Server server) {
+    public ClientHandler(String username, Socket socket, Server server) {
+        this.clientUsername = username;
         this.socket = socket;
         this.server = server;
 
@@ -25,9 +28,11 @@ public class ClientHandler implements Runnable {
 
 
         } catch (IOException e) {
-            closeConnections();
+            close();
         }
     }
+
+    //todo fix if client disconnects, they should disappear from every list
 
     @Override
     public void run() {
@@ -35,14 +40,15 @@ public class ClientHandler implements Runnable {
         try {
             while ((message = reader.readLine()) != null) {
                 if (message.equals("REQUEST REFRESH")) {
-                    handleRequestRefresh();
+                    handleRefreshRequest();
                 }
                 if(message.startsWith("CREATED ROOM:")){
                     handleRoomCreation(message);
                 }
             }
+            server.getConnectedClients().values().removeIf(value ->(value == this));
         } catch (IOException e) {
-            closeConnections();
+            close();
         }
     }
 
@@ -55,14 +61,14 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private void handleRequestRefresh() {
+    private void handleRefreshRequest() {
         try {
-            Set<String> connectedUsers = server.getConnectedUserNames();
+            Set<String> otherConnectedUsers = server.getOtherConnectedUserNames(this);
             Set<String> rooms = server.getCreatedRooms();
 
             String response = "CONNECTED_USERS:";
-            if (!connectedUsers.isEmpty()) {
-                for (String user : connectedUsers) {
+            if (!otherConnectedUsers.isEmpty()) {
+                for (String user : otherConnectedUsers) {
                     response += user + ",";
                 }
                 response = response.substring(0, response.length() - 1);
@@ -81,13 +87,13 @@ public class ClientHandler implements Runnable {
 
         } catch (IOException e) {
             e.printStackTrace();
-            closeConnections();
+            close();
         }
     }
 
 
 
-    private void closeConnections() {
+    private void close() {
         try {
             if (reader != null) reader.close();
             if (writer != null) writer.close();
@@ -95,5 +101,22 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public String getClientUsername() {
+        return clientUsername;
+    }
+
+    public void setClientUsername(String clientUsername) {
+        this.clientUsername = clientUsername;
+    }
+
+    public RoomHandler getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(RoomHandler currentRoom) {
+        this.currentRoom = currentRoom;
     }
 }
