@@ -58,7 +58,7 @@ public class Server {
                 lobbyList.addClient(username);
                 new Thread(clientHandler).start();
 
-                broadcastConnectedUsers();
+
             }
         } catch (IOException e) {
             close();
@@ -144,36 +144,39 @@ public class Server {
         this.rooms = rooms;
     }
 
-    public void broadcastConnectedUsers() {
-        Set<String> connectedUsernames = getConnectedUserNames();
-        Set<String> createdRooms = getCreatedRooms();
 
-        for (Map.Entry<String, ClientHandler> entry : connectedClients.entrySet()) {
-            String clientUsername = entry.getKey();
-            ClientHandler clientHandler = entry.getValue();
 
-            String messageToSend = "CONNECTED_USERS:";
-            for (String username : connectedUsernames) {
-                if (!username.equals(clientUsername)) {
-                    messageToSend += username + ",";
-                }
-            }
-
-            if (messageToSend.endsWith(",")) {
-                messageToSend = messageToSend.substring(0, messageToSend.length() - 1);
-            }
-
-            messageToSend += "\nROOMS:";
-            for (String room : createdRooms) {
-                messageToSend += room + ",";
-            }
-
-            if (messageToSend.endsWith(",")) {
-                messageToSend = messageToSend.substring(0, messageToSend.length() - 1);
-            }
-
-            clientHandler.sendMessage(messageToSend);
-        }
-    }
+    //if i figure out a way to update lobby when a client joins
+//    public void broadcastConnectedUsers() {
+//        Set<String> connectedUsernames = getConnectedUserNames();
+//        Set<String> createdRooms = getCreatedRooms();
+//
+//        for (Map.Entry<String, ClientHandler> entry : connectedClients.entrySet()) {
+//            String clientUsername = entry.getKey();
+//            ClientHandler clientHandler = entry.getValue();
+//
+//            String messageToSend = "CONNECTED_USERS:";
+//            for (String username : connectedUsernames) {
+//                if (!username.equals(clientUsername)) {
+//                    messageToSend += username + ",";
+//                }
+//            }
+//
+//            if (messageToSend.endsWith(",")) {
+//                messageToSend = messageToSend.substring(0, messageToSend.length() - 1);
+//            }
+//
+//            messageToSend += "\nROOMS:";
+//            for (String room : createdRooms) {
+//                messageToSend += room + ",";
+//            }
+//
+//            if (messageToSend.endsWith(",")) {
+//                messageToSend = messageToSend.substring(0, messageToSend.length() - 1);
+//            }
+//
+//            clientHandler.sendMessage(messageToSend);
+//        }
+//    }
 
 }

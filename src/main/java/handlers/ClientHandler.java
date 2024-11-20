@@ -43,13 +43,47 @@ public class ClientHandler implements Runnable {
                 if (message.equals("REQUEST REFRESH")) {
                     handleRefreshRequest();
                 }
-                if(message.startsWith("CREATED ROOM:")){
+                else if(message.startsWith("CREATED ROOM:")){
                     handleRoomCreation(message);
                 }
+                else if(message.startsWith("JOIN ROOM:")){
+                    handleRoomJoin(message);
+                }
+                else if (message.startsWith("ROOM MESSAGE:")) {
+                    String roomMessage = message.replace("ROOM MESSAGE:", "");
+                    sendMessageToCurrentRoom(roomMessage);
+                }
+                else if(message.startsWith("LEAVE ROOM")){
+                    handleRoomLeave();
+                }
+                else if(message.startsWith("USER_DISCONNECTED")){
+                    handleDisconnect();
+                }
+
             }
-            server.getConnectedClients().values().removeIf(value ->(value == this));
         } catch (IOException e) {
             close();
+        }
+    }
+
+    private void handleDisconnect() {
+        server.getConnectedClients().values().removeIf(value ->(value == this));
+    }
+
+    private void handleRoomLeave() {
+        currentRoom.removeMember(this);
+        currentRoom = null;
+    }
+
+    private void handleRoomJoin(String message) {
+        String roomName = message.replace("JOIN ROOM:", "");
+        currentRoom = server.getRooms().get(roomName);
+        currentRoom.addMember(this);
+    }
+
+    public void sendMessageToCurrentRoom(String message) {
+        if (currentRoom != null) {
+            currentRoom.broadcastMessage(message, this);
         }
     }
 

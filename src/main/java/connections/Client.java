@@ -5,7 +5,13 @@ import handlers.DataHandler;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import java.io.*;
 import java.net.Socket;
@@ -28,15 +34,19 @@ public class Client {
             receiveLobbyList();
         } catch(IOException e) {
             e.printStackTrace();
-            close(localhost, reader, writer);
+            close();
         }
+    }
+
+    public void sendRoomMessage(String message) {
+        sendMessage("ROOM MESSAGE:" + message);
     }
 
     private void sendRoomName(String selectedChat) {
             sendMessage("ROOMNAME:" + selectedChat);
     }
 
-    public void close(Socket socket, BufferedReader reader, BufferedWriter writer) {
+    public void close() {
         try {
             if (reader != null) {
                 reader.close();
@@ -53,24 +63,37 @@ public class Client {
     }
 
     public void receiveMessage(VBox chatVBox) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (socket.isConnected()) {
-                    String message = null;
-                    try {
-                        message = reader.readLine();
-                        if (message != null) {
-                            ChatController.receiveMessage(message, chatVBox);
-                        }
-                    }catch(IOException e) {
-                        e.printStackTrace();
-                        break;
+        new Thread(() -> {
+            while (socket.isConnected()) {
+                try {
+                    String message = reader.readLine();
+                    if (message != null) {
+                        Platform.runLater(() -> {
+                            if (!message.isEmpty()) {
+                                HBox hBoxMessage = new HBox();
+                                hBoxMessage.setAlignment(Pos.CENTER_LEFT);
+                                hBoxMessage.setPadding(new Insets(5, 10, 5, 5));
+
+                                Text textToReceive = new Text(message);
+                                TextFlow textFlowMess = new TextFlow(textToReceive);
+
+                                textFlowMess.setStyle("-fx-font-weight: bold; -fx-background-color: #aaa8a8; -fx-text-fill: white");
+                                textFlowMess.setPadding(new Insets(5, 10, 5, 10));
+                                textToReceive.setFill(Color.color(0.934, 0.945, 0.966));
+
+                                hBoxMessage.getChildren().add(textFlowMess);
+                                chatVBox.getChildren().add(hBoxMessage);
+                            }
+                        });
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    break;
                 }
             }
         }).start();
     }
+
 
 
 
@@ -125,7 +148,7 @@ public class Client {
         }catch(IOException e) {
             e.printStackTrace();
             System.out.println("Cant send message" + messageToSend);
-            close(socket, reader, writer);
+            close();
         }
 
     }
@@ -149,5 +172,9 @@ public class Client {
 
     public void requestRefresh() {
         sendMessage("REQUEST REFRESH");
+    }
+
+    public void leaveRoom() {
+        sendMessage("LEAVE ROOM");
     }
 }

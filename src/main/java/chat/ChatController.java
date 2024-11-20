@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -15,9 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-
-import java.io.IOException;
-import java.net.Socket;
+import javafx.stage.Stage;
 
 public class ChatController {
 
@@ -34,42 +33,34 @@ public class ChatController {
     private Button sendButton;
 
     @FXML
-    private TextField sender;
+    private Button exitButton;
+
+    @FXML
+    private Label sender;
 
     private Client client;
 
-    public static void receiveMessage(String message, VBox chatVBox) {
-        if (!message.isEmpty()) {
-            HBox hBoxMessage = new HBox();
-            hBoxMessage.setAlignment(Pos.CENTER_LEFT);
-            hBoxMessage.setPadding(new Insets(5, 10, 5, 5));
-
-            Text textToReceive = new Text(message);
-            TextFlow textFlowMess = new TextFlow(textToReceive);
-
-            textFlowMess.setStyle("-fx-font-weight: bold; -fx-background-color: #aaa8a8; -fx-text-fill: white");
-            textFlowMess.setPadding(new Insets(5, 10, 5, 10));
-            textToReceive.setFill(Color.color(0.934, 0.945, 0.966));
-
-            hBoxMessage.getChildren().add(textFlowMess);
-
-            Platform.runLater(() -> chatVBox.getChildren().add(hBoxMessage));
-        }
-    }
 
 
     public void initialize(){
         this.client = DataHandler.getInstance().getClient();
-        sender.setStyle("-fx-text-fill: darkblue; -fx-background-color: cornflowerblue;");
+        client.receiveMessage(chat_VBox);
         sender.setText(DataHandler.getInstance().getSelectedChat());
         sendButton.setOnAction(this::sendMessageToRoom);
         message.setOnAction(this::sendMessageToRoom);
+        exitButton.setOnAction(this::handleExit);
 
         chat_VBox.heightProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 scrollPanel.setVvalue((double) newValue);
             }
         });
+    }
+
+    private void handleExit(ActionEvent actionEvent) {
+        client.leaveRoom();
+        Stage currentStage = (Stage) exitButton.getScene().getWindow();
+        currentStage.close();
     }
 
     private void sendMessage(ActionEvent actionEvent) {
@@ -97,7 +88,7 @@ public class ChatController {
 
 
     private void sendMessageToRoom(ActionEvent actionEvent) {
-
+        client.sendRoomMessage(message.getText());
     }
 
 

@@ -1,6 +1,7 @@
 package com.crew.mif.chatterbox;
 
 import connections.Server;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,6 +25,9 @@ public class ServerController {
     @FXML
     private Button roomListButton;
 
+    @FXML
+    private Button exitButton;
+
     private Server server;
 
     private LobbyList lobbyList;
@@ -44,9 +48,12 @@ public class ServerController {
         connectedListButton.setOnAction(this::showConnected);
         refreshButton.setOnAction(this::handleRefresh);
         roomListButton.setOnAction(this::showRooms);
+        exitButton.setOnAction(this::handleExit);
+    }
 
-
-
+    private void handleExit(ActionEvent actionEvent) {
+        server.close();
+        Platform.exit();
     }
 
     private void showRooms(ActionEvent actionEvent) {

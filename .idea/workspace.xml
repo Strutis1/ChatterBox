@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="added that the client cant see themselves in list and therefore cant chat to themselves later on">
+    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="user appear in server without needing to refresh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ClientApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/registration/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/chat/chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/chat/chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/crew/mif/chatterbox/server.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lobby/lobby.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +195,7 @@
       <workItem from="1731942444790" duration="6028000" />
       <workItem from="1732003406391" duration="3691000" />
       <workItem from="1732053003336" duration="4296000" />
-      <workItem from="1732094605947" duration="9485000" />
+      <workItem from="1732094605947" duration="19116000" />
     </task>
     <task id="LOCAL-00001" summary="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
       <option name="closed" value="true" />
@@ -223,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732095564368</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="user appear in server without needing to refresh">
+      <option name="closed" value="true" />
+      <created>1732111623895</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732111623895</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +249,7 @@
     <MESSAGE value="Established a connection(doesnt fully work for now)" />
     <MESSAGE value="Server receives usernames, but so does the client so that they can choose who to chat with later, added a lobby" />
     <MESSAGE value="added that the client cant see themselves in list and therefore cant chat to themselves later on" />
-    <option name="LAST_COMMIT_MESSAGE" value="added that the client cant see themselves in list and therefore cant chat to themselves later on" />
+    <MESSAGE value="user appear in server without needing to refresh" />
+    <option name="LAST_COMMIT_MESSAGE" value="user appear in server without needing to refresh" />
   </component>
 </project>

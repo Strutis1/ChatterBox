@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -13,6 +14,7 @@ public class ServerApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientApplication.class.getResource("server.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 389, 579);
         stage.setTitle("Server");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

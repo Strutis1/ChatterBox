@@ -12,6 +12,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -77,6 +78,7 @@ public class RegistrationController {
             Stage lobbyStage = new Stage();
             Scene lobbyScene = new Scene(lobbyRoot, 389, 578);
             lobbyStage.setTitle("ChatterBox-lobby");
+            lobbyStage.setResizable(false);
             lobbyStage.setScene(lobbyScene);
             lobbyStage.show();
 

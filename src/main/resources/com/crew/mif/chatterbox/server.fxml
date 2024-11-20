@@ -11,15 +11,26 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crew.mif.chatterbox.ServerController">
     <children>
-        <BorderPane prefHeight="82.0" prefWidth="390.0" style="-fx-background-color: darkblue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <center>
-                <Label prefHeight="48.0" prefWidth="183.0" style="-fx-text-fill: cornflowerblue;" text="CHATTER BOX" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font name="Haettenschweiler" size="45.0" />
-                    </font>
-                </Label>
-            </center>
-        </BorderPane>
+      <BorderPane layoutX="-1.0" prefHeight="82.0" prefWidth="390.0" style="-fx-background-color: darkblue;">
+         <center>
+            <Label prefHeight="48.0" prefWidth="183.0" style="-fx-text-fill: cornflowerblue;" text="CHATTER BOX" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Haettenschweiler" size="45.0" />
+               </font>
+            </Label>
+         </center>
+         <top>
+            <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="390.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="exitButton" mnemonicParsing="false" style="-fx-background-color: cornflowerblue; -fx-text-fill: darkblue; -fx-font-family: haettenschweiler; -fx-font-size: 18;" text="EXIT">
+                     <font>
+                        <Font name="Haettenschweiler" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
         <HBox layoutY="79.2" prefHeight="39.0" prefWidth="389.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Button fx:id="connectedListButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="194.0" style="-fx-background-color: cornflowerblue; -fx-font-family: haettenschweiller; -fx-text-fill: white; -fx-font-size: 18;" text="Users" />
