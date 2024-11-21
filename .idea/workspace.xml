@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="user appear in server without needing to refresh">
+    <list default="true" id="7b954b53-dfc9-4c89-b6e4-9a2d829f37c1" name="Changes" comment="Added logic to rooms and lobby, chat controller is almost done all that is left is to send message">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/chat/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ClientApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/crew/mif/chatterbox/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connections/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Room.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/connections/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connections/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/handlers/RoomHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lobby/LobbyController.java" afterDir="false" />
@@ -195,7 +195,8 @@
       <workItem from="1731942444790" duration="6028000" />
       <workItem from="1732003406391" duration="3691000" />
       <workItem from="1732053003336" duration="4296000" />
-      <workItem from="1732094605947" duration="19116000" />
+      <workItem from="1732094605947" duration="19452000" />
+      <workItem from="1732132349268" duration="16833000" />
     </task>
     <task id="LOCAL-00001" summary="Skeletons for controllers built, added LobbyList class for easier lobby list modification down the line">
       <option name="closed" value="true" />
@@ -237,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732111623895</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added logic to rooms and lobby, chat controller is almost done all that is left is to send message">
+      <option name="closed" value="true" />
+      <created>1732127061574</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732127061576</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +259,7 @@
     <MESSAGE value="Server receives usernames, but so does the client so that they can choose who to chat with later, added a lobby" />
     <MESSAGE value="added that the client cant see themselves in list and therefore cant chat to themselves later on" />
     <MESSAGE value="user appear in server without needing to refresh" />
-    <option name="LAST_COMMIT_MESSAGE" value="user appear in server without needing to refresh" />
+    <MESSAGE value="Added logic to rooms and lobby, chat controller is almost done all that is left is to send message" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added logic to rooms and lobby, chat controller is almost done all that is left is to send message" />
   </component>
 </project>

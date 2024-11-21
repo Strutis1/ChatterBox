@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ChatController {
 
@@ -32,8 +33,6 @@ public class ChatController {
     @FXML
     private Button sendButton;
 
-    @FXML
-    private Button exitButton;
 
     @FXML
     private Label sender;
@@ -48,7 +47,11 @@ public class ChatController {
         sender.setText(DataHandler.getInstance().getSelectedChat());
         sendButton.setOnAction(this::sendMessageToRoom);
         message.setOnAction(this::sendMessageToRoom);
-        exitButton.setOnAction(this::handleExit);
+
+        Platform.runLater(() -> {
+            Stage currentStage = (Stage) chat_VBox.getScene().getWindow();
+            currentStage.setOnCloseRequest(this::handleExit);
+        });
 
         chat_VBox.heightProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -57,13 +60,11 @@ public class ChatController {
         });
     }
 
-    private void handleExit(ActionEvent actionEvent) {
+    private void handleExit(WindowEvent windowEvent) {
         client.leaveRoom();
-        Stage currentStage = (Stage) exitButton.getScene().getWindow();
-        currentStage.close();
     }
 
-    private void sendMessage(ActionEvent actionEvent) {
+    private void sendMessageToRoom(ActionEvent actionEvent) {
         String messageToSend = message.getText();
         if (!messageToSend.isEmpty()) {
             HBox hBox = new HBox();
@@ -73,22 +74,16 @@ public class ChatController {
             Text textToSend = new Text(messageToSend);
             TextFlow textFlow = new TextFlow(textToSend);
 
-            textFlow.setStyle("-fx-font-weight: bold; -fx-background-color: white;");
+            textFlow.setStyle("-fx-font-weight: bold; -fx-background-color: darkblue;");
             textFlow.setPadding(new Insets(5, 10, 5, 10));
-            textToSend.setFill(Color.color(0.2, 0.4, 0.96));
+            textToSend.setFill(Color.color(1, 1, 1));
 
             hBox.getChildren().add(textFlow);
             chat_VBox.getChildren().add(hBox);
 
-            client.sendMessage(messageToSend);
+            client.sendMessage("ROOM MESSAGE:" + messageToSend);
             message.clear();
         }
-    }
-
-
-
-    private void sendMessageToRoom(ActionEvent actionEvent) {
-        client.sendRoomMessage(message.getText());
     }
 
 

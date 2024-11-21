@@ -4,6 +4,8 @@ import connections.Server;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ClientHandler implements Runnable {
@@ -59,6 +61,9 @@ public class ClientHandler implements Runnable {
                 else if(message.startsWith("USER_DISCONNECTED")){
                     handleDisconnect();
                 }
+                else if(message.startsWith("CREATE_PRIVATE_CHAT")){
+                    handlePrivateChatCreation(message);
+                }
 
             }
         } catch (IOException e) {
@@ -68,6 +73,7 @@ public class ClientHandler implements Runnable {
 
     private void handleDisconnect() {
         server.getConnectedClients().values().removeIf(value ->(value == this));
+
     }
 
     private void handleRoomLeave() {
@@ -75,7 +81,29 @@ public class ClientHandler implements Runnable {
         currentRoom = null;
     }
 
-    private void handleRoomJoin(String message) {
+    private synchronized void handlePrivateChatCreation(String message) {
+        String[] members = message.replace("CREATE_PRIVATE_CHAT", "").split(":");
+        String normalizedRoomName = normalizeRoomName(members[0], members[1]);
+        System.out.println(normalizedRoomName);
+        if (server.getPrivateChats().containsKey(normalizedRoomName)) {
+            currentRoom = server.getPrivateChats().get(normalizedRoomName);
+            currentRoom.addMember(this);
+        } else {
+            server.getPrivateChats().put(normalizedRoomName, new RoomHandler(normalizedRoomName));
+            currentRoom = server.getPrivateChats().get(normalizedRoomName);
+            currentRoom.addMember(this);
+        }
+    }
+
+    private String normalizeRoomName(String user1, String user2) {
+        if (user1.compareTo(user2) < 0) {
+            return user1 + ":" + user2;
+        } else {
+            return user2 + ":" + user1;
+        }
+    }
+
+    private synchronized void handleRoomJoin(String message) {
         String roomName = message.replace("JOIN ROOM:", "");
         currentRoom = server.getRooms().get(roomName);
         currentRoom.addMember(this);
@@ -90,32 +118,23 @@ public class ClientHandler implements Runnable {
     private void handleRoomCreation(String room){
         try{
             String roomName = room.replace("CREATED ROOM:", "");
-            server.getRooms().put(roomName, new RoomHandler(roomName, server));
+            if(!server.getRooms().containsKey(roomName)) {
+                server.getRooms().put(roomName, new RoomHandler(roomName));
+                server.getLobbyList().addRoom(roomName);
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
     }
 
     private void handleRefreshRequest() {
-            Set<String> otherConnectedUsers = server.getOtherConnectedUserNames(this);
-            Set<String> rooms = server.getCreatedRooms();
+        Set<String> otherConnectedUsers = server.getOtherConnectedUserNames(this);
+        Set<String> rooms = server.getCreatedRooms();
 
-            String response = "CONNECTED_USERS:";
-            if (!otherConnectedUsers.isEmpty()) {
-                for (String user : otherConnectedUsers) {
-                    response += user + ",";
-                }
-                response = response.substring(0, response.length() - 1);
-            }
-            response += "\nROOMS:";
-            if (!rooms.isEmpty()) {
-                for (String room : rooms) {
-                    response += room + ",";
-                }
-                response = response.substring(0, response.length() - 1);
-            }
+        String response = "CONNECTED_USERS:" + String.join(",", otherConnectedUsers) +
+            "\nROOMS:" + String.join(",", rooms);
 
-            sendMessage(response);
+        sendMessage(response);
     }
 
 

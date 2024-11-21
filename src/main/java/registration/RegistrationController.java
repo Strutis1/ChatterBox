@@ -8,11 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -47,7 +45,7 @@ public class RegistrationController {
         }
         Platform.runLater(() -> {
             DataHandler.getInstance().setClient(client);
-            openChat();
+            openLobby();
         });
 
     }
@@ -70,7 +68,7 @@ public class RegistrationController {
     }
 
 
-    private void openChat() {
+    private void openLobby() {
         try {
             FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby/lobby.fxml"));
             Parent lobbyRoot = lobbyLoader.load();

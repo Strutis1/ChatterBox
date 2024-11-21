@@ -21,6 +21,8 @@ public class Server {
     private Map<String, ClientHandler> connectedClients = new HashMap<>();
     private Map<String, RoomHandler> rooms = new HashMap<>();
 
+    private Map<String, RoomHandler> privateChats = new HashMap<>();
+
     private LobbyList lobbyList;
 
     public Server(ServerSocket serverSocket, LobbyList lobbyList) {
@@ -40,7 +42,6 @@ public class Server {
 
 
                 ClientHandler clientHandler = new ClientHandler(username, clientSocket, this);
-                RoomHandler roomHandler;
 
 //                String roomName = receiveRoomName();
 
@@ -79,21 +80,6 @@ public class Server {
             return "";
         }
     }
-
-//    public String receiveRoomName(){
-//        try {
-//            String str = reader.readLine();
-//            System.out.println("Received from client: " + str);
-//            if(str.startsWith("ROOMNAME:")){
-//                return str.replace("ROOMNAME:", "");
-//            }
-//            throw new IOException("cant send room name");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            close(serverSocket, reader, writer);
-//            return "";
-//        }
-//    }
 
 
 
@@ -144,6 +130,17 @@ public class Server {
         this.rooms = rooms;
     }
 
+    public Map<String, RoomHandler> getPrivateChats() {
+        return privateChats;
+    }
+
+    public void setPrivateChats(Map<String, RoomHandler> privateChats) {
+        this.privateChats = privateChats;
+    }
+
+    public LobbyList getLobbyList() {
+        return lobbyList;
+    }
 
 
     //if i figure out a way to update lobby when a client joins

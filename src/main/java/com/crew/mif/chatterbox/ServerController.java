@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import lobby.LobbyList;
 
 import java.io.IOException;
@@ -25,8 +27,6 @@ public class ServerController {
     @FXML
     private Button roomListButton;
 
-    @FXML
-    private Button exitButton;
 
     private Server server;
 
@@ -45,16 +45,20 @@ public class ServerController {
                 e.printStackTrace();
             }
         }).start();
+        Platform.runLater(()->{
+            Stage currentStage = (Stage) refreshButton.getScene().getWindow();
+            currentStage.setOnCloseRequest(this::handleExit);
+        });
         connectedListButton.setOnAction(this::showConnected);
         refreshButton.setOnAction(this::handleRefresh);
         roomListButton.setOnAction(this::showRooms);
-        exitButton.setOnAction(this::handleExit);
     }
 
-    private void handleExit(ActionEvent actionEvent) {
+    private void handleExit(WindowEvent windowEvent) {
         server.close();
         Platform.exit();
     }
+
 
     private void showRooms(ActionEvent actionEvent) {
         if(lobbyList.getRoomList() != null) {

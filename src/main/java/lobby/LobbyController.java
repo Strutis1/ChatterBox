@@ -2,6 +2,7 @@ package lobby;
 
 import connections.Client;
 import handlers.DataHandler;
+import handlers.RoomHandler;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +15,13 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
 public class LobbyController {
 
-    //todo update lists right after changes no need for refresh
-    //todo remove users or rooms
+
 
 
     @FXML
@@ -44,12 +45,9 @@ public class LobbyController {
     @FXML
     private TextField roomName;
 
-    @FXML
-    private Button exitButton;
-
     private LobbyList lobbyList;
 
-    private boolean selectedConnected;
+    private boolean selectedConnected = true;
 
     private Client client;
 
@@ -70,7 +68,10 @@ public class LobbyController {
         refreshButton.setOnAction(this::handleRefresh);
         roomListButton.setOnAction(this::showRooms);
         roomName.setOnAction(this::handleRoomName);
-        exitButton.setOnAction(this::handleExit);
+        Platform.runLater(() -> {
+            Stage currentStage = (Stage) chatButton.getScene().getWindow();
+            currentStage.setOnCloseRequest(this::handleExit);
+        });
 
 
         currentLobbyList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -84,11 +85,11 @@ public class LobbyController {
         });
     }
 
-    private void handleExit(ActionEvent actionEvent) {
+    private void handleExit(WindowEvent windowEvent) {
         client.sendMessage("USER_DISCONNECTED");
-        client.close();
-        Platform.exit();
+        Platform.runLater(() ->{client.close();});
     }
+
 
     private void handleRoomName(ActionEvent actionEvent) {
         if(!roomName.getText().isEmpty()) {
@@ -121,10 +122,11 @@ public class LobbyController {
         lobbyList.getRoomList().setAll(DataHandler.getInstance().getCreatedRooms());
     }
 
-    //todo add to handler if we create a room
     private void handleRoomCreation(ActionEvent actionEvent) {
         if(!roomName.getText().isEmpty()){
             client.sendMessage("CREATED ROOM:" + roomName.getText());
+            roomName.clear();
+            createRoomButton.setDisable(true);
             Platform.runLater(this::updateLobby);
         }
     }
@@ -141,7 +143,8 @@ public class LobbyController {
     private void handleChat(ActionEvent actionEvent) {
         try {
             if(selectedConnected){
-                DataHandler.getInstance().setSelectedChat("Chatting with " + currentLobbyList.getSelectionModel().getSelectedItem());
+                DataHandler.getInstance().setSelectedChat(currentLobbyList.getSelectionModel().getSelectedItem());
+                client.sendMessage("CREATE_PRIVATE_CHAT" + client.getUsername() + ":" + currentLobbyList.getSelectionModel().getSelectedItem());
             } else{
                 String selectedRoom = currentLobbyList.getSelectionModel().getSelectedItem();
                 client.sendMessage("JOIN ROOM:" + selectedRoom);
@@ -152,7 +155,7 @@ public class LobbyController {
 
             Stage chatStage = new Stage();
             Scene chatScene = new Scene(chatRoot, 389, 578);
-            chatStage.setTitle("ChatterBox-lobby");
+            chatStage.setTitle("ChatterBox");
             chatStage.setAlwaysOnTop(true);
             chatStage.setResizable(false);
             chatStage.setScene(chatScene);

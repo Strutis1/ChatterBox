@@ -28,6 +28,7 @@ public class Client {
     public Client(Socket localhost) {
         try {
             this.socket = localhost;
+            this.username = DataHandler.getInstance().getUsername();
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             sendUsername(DataHandler.getInstance().getUsername());
@@ -38,13 +39,6 @@ public class Client {
         }
     }
 
-    public void sendRoomMessage(String message) {
-        sendMessage("ROOM MESSAGE:" + message);
-    }
-
-    private void sendRoomName(String selectedChat) {
-            sendMessage("ROOMNAME:" + selectedChat);
-    }
 
     public void close() {
         try {
@@ -69,7 +63,22 @@ public class Client {
                     String message = reader.readLine();
                     if (message != null) {
                         Platform.runLater(() -> {
-                            if (!message.isEmpty()) {
+                            if (message.startsWith("NOTIFICATION:")) {
+                                HBox hBoxMessage = new HBox();
+
+                                hBoxMessage.setAlignment(Pos.CENTER);
+                                hBoxMessage.setPadding(new Insets(5, 10, 5, 5));
+
+                                Text textToReceive = new Text(message.replace("NOTIFICATION:", ""));
+                                TextFlow textFlowMess = new TextFlow(textToReceive);
+
+                                textFlowMess.setStyle("-fx-font-weight: bold; -fx-background-color: cornflowerblue; -fx-text-fill: white");
+                                textFlowMess.setPadding(new Insets(5, 10, 5, 10));
+                                textToReceive.setFill(Color.color(0.934, 0.945, 0.966));
+
+                                hBoxMessage.getChildren().add(textFlowMess);
+                                chatVBox.getChildren().add(hBoxMessage);
+                            } else {
                                 HBox hBoxMessage = new HBox();
                                 hBoxMessage.setAlignment(Pos.CENTER_LEFT);
                                 hBoxMessage.setPadding(new Insets(5, 10, 5, 5));
@@ -77,7 +86,7 @@ public class Client {
                                 Text textToReceive = new Text(message);
                                 TextFlow textFlowMess = new TextFlow(textToReceive);
 
-                                textFlowMess.setStyle("-fx-font-weight: bold; -fx-background-color: #aaa8a8; -fx-text-fill: white");
+                                textFlowMess.setStyle("-fx-font-weight: bold; -fx-background-color: cornflowerblue; -fx-text-fill: white");
                                 textFlowMess.setPadding(new Insets(5, 10, 5, 10));
                                 textToReceive.setFill(Color.color(0.934, 0.945, 0.966));
 

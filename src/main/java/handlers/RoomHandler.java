@@ -1,6 +1,5 @@
 package handlers;
 
-import connections.Server;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,11 +9,9 @@ public class RoomHandler {
     private String roomName;
 
     private Set<ClientHandler> participants;
-    private Server server;
 
-    public RoomHandler(String name, Server server) {
+    public RoomHandler(String name) {
         this.roomName = name;
-        this.server = server;
         this.participants = new HashSet<>();
     }
 
@@ -35,21 +32,31 @@ public class RoomHandler {
     }
 
 
-    public void addMember(ClientHandler clientHandler) {
+    public synchronized void addMember(ClientHandler clientHandler) {
         participants.add(clientHandler);
-        broadcastMessage(clientHandler.getClientUsername() + " has joined the room.", clientHandler);
+        broadcastMessage("NOTIFICATION:" + clientHandler.getClientUsername() + " has joined the room.", clientHandler);
     }
 
-    public void removeMember(ClientHandler clientHandler) {
+    public synchronized void removeMember(ClientHandler clientHandler) {
         participants.remove(clientHandler);
-        broadcastMessage(clientHandler.getClientUsername() + " has left the room.", clientHandler);
+        broadcastMessage("NOTIFICATION:" + clientHandler.getClientUsername() + " has left the room.", clientHandler);
     }
 
-    public void broadcastMessage(String message, ClientHandler sender) {
-        for (ClientHandler participant : participants) {
-            if (!participant.equals(sender)) {
-                participant.sendMessage("ROOM:" + roomName + ":" + sender.getClientUsername() + ": " + message);
+    public synchronized void broadcastMessage(String message, ClientHandler sender) {
+        if(message.startsWith("NOTIFICATION:")){
+            for (ClientHandler participant : participants) {
+                 if  (!participant.equals(sender)) {
+                    participant.sendMessage(message);
+                }
+            }
+        }else {
+            for (ClientHandler participant : participants) {
+                if (!participant.equals(sender)) {
+                    participant.sendMessage(sender.getClientUsername() + ": " + message);//sender.getClientUsername() + ": " + message
+                }
             }
         }
     }
+
+
 }

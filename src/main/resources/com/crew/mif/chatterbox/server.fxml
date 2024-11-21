@@ -19,17 +19,6 @@
                </font>
             </Label>
          </center>
-         <top>
-            <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="390.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="exitButton" mnemonicParsing="false" style="-fx-background-color: cornflowerblue; -fx-text-fill: darkblue; -fx-font-family: haettenschweiler; -fx-font-size: 18;" text="EXIT">
-                     <font>
-                        <Font name="Haettenschweiler" size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </top>
       </BorderPane>
         <HBox layoutY="79.2" prefHeight="39.0" prefWidth="389.0" style="-fx-alignment: center;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
